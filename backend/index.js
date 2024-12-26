@@ -12,9 +12,17 @@ import settingRouter from "./routes/setting.js";
 import manageLeaveRouter from "./routes/manageLeaves.js";
 import dashBoardRouter from "./routes/dashboard.js";
 
-connectToDB();
 const app = express();
-app.use(cors());
+
+const corsConfig = {
+  origin: "*",
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization"],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+};
+app.options("", cors(corsConfig));
+app.use(cors(corsConfig));
+connectToDB();
 app.use(express.json());
 app.use("/public", express.static("public"));
 
@@ -25,12 +33,11 @@ app.use("/api/employee", employeeRouter);
 app.use("/api/salary", salaryRouter);
 
 app.use("/api/leave", leaveRouter);
-app.use("/api/setting", settingRouter)
+app.use("/api/setting", settingRouter);
 
-app.use("/api/leaves", manageLeaveRouter)
+app.use("/api/leaves", manageLeaveRouter);
 
-app.use("/api/dashboard", dashBoardRouter)
-
+app.use("/api/dashboard", dashBoardRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on http://localhost:${process.env.PORT}`);
