@@ -1,8 +1,8 @@
-import React from "react";
+
 import { motion } from "framer-motion";
 import { Users, LogIn, UserPlus, LogOut } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+
 
 const Header = () => {
   const { user, logout } = useAuth();
