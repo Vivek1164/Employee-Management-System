@@ -23,6 +23,10 @@ import Setting from "./pages/Setting";
 import AdminLeave from "./components/dashBoard/AdminLeave";
 import ViewPersonLeave from "./components/dashBoard/ViewPersonLeave";
 import PerPersonLeave from "./components/Leaves/PerPersonLeave";
+import Home from "./pages/Home";
+import SingUp from "./pages/SingUp";
+
+
 
 function App() {
   return (
@@ -30,6 +34,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/admin-dashboard" />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/Home" element={<Home />} />
+        <Route path="/signup" element={<SingUp />} />
         <Route
           path="/admin-dashboard"
           element={
@@ -94,7 +100,7 @@ function App() {
           path="/employee-dashboard"
           element={
             <PrivateRoutes>
-              <RoleBasedRoutes requiredRole={["admin", "employee"]}>
+              <RoleBasedRoutes requiredRole={[ "employee"]}>
                 <EmployeeDashboard />
               </RoleBasedRoutes>
             </PrivateRoutes>

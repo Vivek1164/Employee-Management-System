@@ -32,7 +32,38 @@ const login = async (req, res) => {
 };
 
 const verify = async (req, res) => {
-    return res.status(200).json({ success: true, message: "Verified", user: req.user });
-}
+  return res
+    .status(200)
+    .json({ success: true, message: "Verified", user: req.user });
+};
 
-export {login, verify};
+const register = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    console.log(name, email, password);
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Email already exists" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = new User({
+      name,
+      email,
+      password: hashedPassword,
+      role: "employee",
+    });
+    await user.save();
+
+    return res
+      .status(200)
+      .json({ success: true, message: "rigester successfully" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ success: false, message: "Failed to register" });
+  }
+};
+
+export { login, verify, register };
