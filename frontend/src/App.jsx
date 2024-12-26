@@ -26,8 +26,6 @@ import PerPersonLeave from "./components/Leaves/PerPersonLeave";
 import Home from "./pages/Home";
 import SingUp from "./pages/SingUp";
 
-
-
 function App() {
   return (
     <BrowserRouter>
@@ -95,12 +93,16 @@ function App() {
             path="/admin-dashboard/employees/leave/:id"
             element={<PerPersonLeave />}
           ></Route>
+          <Route
+            path="/admin-dashboard/setting"
+            element={<Setting />}
+          ></Route>
         </Route>
         <Route
           path="/employee-dashboard"
           element={
             <PrivateRoutes>
-              <RoleBasedRoutes requiredRole={[ "employee"]}>
+              <RoleBasedRoutes requiredRole={["employee"]}>
                 <EmployeeDashboard />
               </RoleBasedRoutes>
             </PrivateRoutes>
